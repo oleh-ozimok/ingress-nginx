@@ -221,11 +221,6 @@ func (sc *SocketCollector) handleMessage(msg []byte) {
 	}
 
 	for _, stats := range statsBatch {
-		if !sc.hosts.Has(stats.Host) {
-			klog.V(3).Infof("skiping metric for host %v that is not being served", stats.Host)
-			continue
-		}
-
 		// Note these must match the order in requestTags at the top
 		requestLabels := prometheus.Labels{
 			"status":    stats.Status,
